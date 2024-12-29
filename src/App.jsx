@@ -1,7 +1,11 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, HStack } from "@chakra-ui/react";
+import { ColorModeButton } from "./components/ui/color-mode";
 
 export default function App() {
     return (
-        <Heading size="2xl" color="timetide">timetide: project init</Heading>
+        <HStack>
+            <Heading size="2xl" color="timetide">timetide: project init</Heading>
+            <ColorModeButton />
+        </HStack>
     )
 }
