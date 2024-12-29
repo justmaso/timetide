@@ -5,7 +5,7 @@ export const system = createSystem(defaultConfig, {
     globalCss: {
         // ensures the background has a smooth transition
         "html, body": {
-            transition: "color 0.05s ease-in, background-color 0.15s ease-in !important",
+            transition: "color 0.05s ease-in, background-color 0.15s ease-in !important"
         },
         // ensures that buttons have a smoooth transition
         "button": {
@@ -13,9 +13,17 @@ export const system = createSystem(defaultConfig, {
         },
         // ensures consistent icon sizing
         ".chakra-button svg": {
-            width: "1.3rem !important",
-            height: "1.3rem !important"
-        }
+            width: "1.5rem !important",
+            height: "1.5rem !important"
+        },
+        // ensures progress bars have a smooth transition
+        "div.chakra-progress__track": {
+            transition: "background-color 0.15s ease-in !important"
+        },
+        // ensures the input borders have a smooth transition
+        "input": {
+            transition: "border-color 0.15s ease-in !important"
+        },
     },
     theme: {
         tokens: {
