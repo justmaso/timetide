@@ -1,9 +1,9 @@
-import { ColorModeButton } from './components/ui/color-mode'
 import { Flex, Heading, HStack, Tabs } from "@chakra-ui/react"
 import { PiWavesBold } from "react-icons/pi"
 import { LuChartLine, LuHouse, LuSettings } from "react-icons/lu"
 import { TimetideIcon } from './components/ui/icon'
 import TimeInput from './components/TimeInput'
+import { Tooltip } from './components/ui/tooltip'
 
 export const Title = () => {
     return (
@@ -20,31 +20,45 @@ export const Title = () => {
 
 export default function App() {
     return (
-        <Flex flexDir="column" m="4" gapY="2" w="75%" mx="auto">
-            <HStack justify="space-between">
-                <Title />
-                <ColorModeButton />
-            </HStack>
-            <Tabs.Root defaultValue="home" variant="line" size="lg" fitted>
-                <Tabs.List>
-                    <Tabs.Trigger value="home">
-                        <TimetideIcon color="timetide.400">
-                            <LuHouse />
-                        </TimetideIcon>
-                        home
-                    </Tabs.Trigger>
-                    <Tabs.Trigger value="stats">
-                        <TimetideIcon color="timetide.400">
-                            <LuChartLine />
-                        </TimetideIcon>
-                        stats
-                    </Tabs.Trigger>
-                    <Tabs.Trigger value="settings">
-                        <TimetideIcon color="timetide.400">
-                            <LuSettings />
-                        </TimetideIcon>
-                        settings
-                    </Tabs.Trigger>
+        <Flex flexDir="column" p="4" gapY="2" mx="auto">
+            <Tabs.Root defaultValue="home" variant="outline" size="sm">
+                <Tabs.List justifyContent="space-between">
+                    <HStack mt="-2">
+                        <Title />
+                    </HStack>
+                    <HStack>
+                        <Tooltip
+                            content="home"
+                            showArrow
+                            positioning={{ placement: "left" }}
+                        >
+                            <Tabs.Trigger value="home">
+                                <TimetideIcon color="timetide.400">
+                                    <LuHouse />
+                                </TimetideIcon>
+                            </Tabs.Trigger>
+                        </Tooltip>
+                        <Tooltip
+                            content="stats"
+                            showArrow
+                        >
+                            <Tabs.Trigger value="stats">
+                                <TimetideIcon color="timetide.400">
+                                    <LuChartLine />
+                                </TimetideIcon>
+                            </Tabs.Trigger>
+                        </Tooltip>
+                        <Tooltip
+                            content="settings"
+                            showArrow
+                        >
+                            <Tabs.Trigger value="settings">
+                                <TimetideIcon color="timetide.400">
+                                    <LuSettings />
+                                </TimetideIcon>
+                            </Tabs.Trigger>
+                        </Tooltip>
+                    </HStack>
                 </Tabs.List>
                 <Tabs.Content value="home">
                     <Flex columnGap="2" width="100%" justifyContent="center">

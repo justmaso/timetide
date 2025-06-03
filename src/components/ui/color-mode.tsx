@@ -60,7 +60,7 @@ export const ColorModeButton = React.forwardRef<
       <Tooltip
         content="toggle theme"
         showArrow
-        positioning={{ placement: "left" }}
+        positioning={{ placement: "right" }}
       >
         <TimetideIconButton
           onClick={toggleColorMode}

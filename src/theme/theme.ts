@@ -1,10 +1,9 @@
-import { createSystem, defaultConfig } from "@chakra-ui/react";
-import { nonSemanticColours, semanticColours } from "./colours";
-import { globalStyles } from "./global";
+import { createSystem, defaultConfig } from "@chakra-ui/react"
+import { nonSemanticColours, semanticColours } from "./colours"
 
 
 export const system = createSystem(defaultConfig, {
-    globalCss: globalStyles,
+    // globalCss: globalStyles,
     theme: {
         tokens: {
             colors: nonSemanticColours,
