@@ -13,7 +13,7 @@ export interface ColorModeProviderProps extends ThemeProviderProps {}
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
+    <ThemeProvider attribute="class" disableTransitionOnChange enableSystem={false} {...props} />
   )
 }
 
@@ -26,8 +26,8 @@ export interface UseColorModeReturn {
 }
 
 export function useColorMode(): UseColorModeReturn {
-  const { resolvedTheme, setTheme, forcedTheme } = useTheme()
-  const colorMode = forcedTheme || resolvedTheme
+  const { resolvedTheme, setTheme } = useTheme()
+  const colorMode = resolvedTheme
   const toggleColorMode = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
@@ -60,7 +60,7 @@ export const ColorModeButton = React.forwardRef<
       <Tooltip
         content="toggle theme"
         showArrow
-        positioning={{ placement: "right" }}
+        positioning={{ placement: "left" }}
       >
         <TimetideIconButton
           onClick={toggleColorMode}
