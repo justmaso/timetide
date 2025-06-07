@@ -1,85 +1,95 @@
-import { Flex, Heading, HStack, Tabs } from "@chakra-ui/react"
-import { PiWavesBold } from "react-icons/pi"
-import { LuChartLine, LuHouse, LuSettings } from "react-icons/lu"
+import React, { useEffect, useRef } from "react"
+import { Flex, HStack, Tabs } from "@chakra-ui/react"
+import { LuHouse, LuSettings } from "react-icons/lu"
 import { TimetideIcon } from './components/ui/icon'
-import TimeInput from './components/TimeInput'
-import { Tooltip } from './components/ui/tooltip'
+import { TimetideHeading } from "./components/ui/TimetideHeading"
 
-export const Title = () => {
-    return (
-        <HStack align="center">
-            <TimetideIcon size="2xl" color="timetide.400">
-                <PiWavesBold />
-            </TimetideIcon>
-            <Heading size="4xl">
-                timetide
-            </Heading>
-        </HStack>
-    )
+export type TabName = "home" | "settings"
+const Home = React.lazy(() => import("./pages/Home"))
+const Settings = React.lazy(() => import("./pages/Settings"))
+
+export interface TabContentProps {
+    value: TabName,
+    icon: React.ReactElement
+    content: () => React.ReactElement
 }
 
 export default function App() {
+    const rootRef = useRef<HTMLDivElement>(null)
+    const allContent: TabContentProps[] = [
+        {
+            value: "home",
+            icon: <LuHouse />,
+            content: () => <Home />
+        },
+        {
+            value: "settings",
+            icon: <LuSettings />,
+            content: () => <Settings />
+        },
+    ]
+
+    // handle chakra ui overriding custom tabindexing
+    useEffect(() => {
+        if (!rootRef.current) return
+
+        const observer = new MutationObserver(() => {
+            const contents = rootRef.current?.querySelectorAll<HTMLElement>(".chakra-tabs__content")
+            contents?.forEach(el => {
+                // override any tabindex changes
+                if (el.getAttribute("tabindex") === "0") {
+                    el.setAttribute("tabindex", "-1")
+                }
+            })
+        })
+
+        observer.observe(rootRef.current, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ["tabindex"]
+        })
+
+        // initial run in case chakra ui already sets tabindex=0 before observer attached
+        const contents = rootRef.current.querySelectorAll<HTMLElement>(".chakra-tabs__content")
+        contents.forEach(el => el.setAttribute("tabindex", "-1"))
+
+        return () => observer.disconnect()
+    }, [])
+
     return (
-        <Flex flexDir="column" p="4" gapY="2" mx="auto">
-            <Tabs.Root defaultValue="home" variant="outline" size="sm">
+        <Flex
+            ref={rootRef}
+            flexDir="column"
+            p="4"
+            gapY="2"
+            maxWidth="360px"
+            mx="auto"
+        >
+            <Tabs.Root
+                defaultValue="home"
+                variant="outline"
+                size="sm"
+            >
                 <Tabs.List justifyContent="space-between">
-                    <HStack mt="-2">
-                        <Title />
-                    </HStack>
-                    <HStack>
-                        <Tooltip
-                            content="home"
-                            showArrow
-                            positioning={{ placement: "left" }}
-                        >
-                            <Tabs.Trigger value="home">
+                    <TimetideHeading />
+                    <HStack gap="-1">
+                        {allContent.map(({ value, icon }) => (
+                            <Tabs.Trigger value={value} key={value}>
                                 <TimetideIcon color="timetide.400">
-                                    <LuHouse />
+                                    {icon}
                                 </TimetideIcon>
                             </Tabs.Trigger>
-                        </Tooltip>
-                        <Tooltip
-                            content="stats"
-                            showArrow
-                        >
-                            <Tabs.Trigger value="stats">
-                                <TimetideIcon color="timetide.400">
-                                    <LuChartLine />
-                                </TimetideIcon>
-                            </Tabs.Trigger>
-                        </Tooltip>
-                        <Tooltip
-                            content="settings"
-                            showArrow
-                        >
-                            <Tabs.Trigger value="settings">
-                                <TimetideIcon color="timetide.400">
-                                    <LuSettings />
-                                </TimetideIcon>
-                            </Tabs.Trigger>
-                        </Tooltip>
+                        ))}
                     </HStack>
                 </Tabs.List>
-                <Tabs.Content value="home">
-                    <Flex columnGap="2" width="100%" justifyContent="center">
-                        <TimeInput
-                            title="task time"
-                            time="000000"
-                            setTime={() => {}}
-                            progress={100}
-                            disabled={false}
-                            />
-                        <TimeInput
-                            title="rest time"
-                            time="000000"
-                            setTime={() => {}}
-                            progress={100}
-                            disabled={false}
-                        />
-                    </Flex>
-                </Tabs.Content>
-                <Tabs.Content value="stats">stats</Tabs.Content>
-                <Tabs.Content value="settings">settings</Tabs.Content>
+                {allContent.map(({ value, content }) => (
+                    <Tabs.Content
+                        value={value}
+                        key={value}
+                    >
+                        {content()}
+                    </Tabs.Content>
+                ))}
             </Tabs.Root>
         </Flex>
     )
