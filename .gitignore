@@ -12,6 +12,9 @@ node_modules
 dist
 dist-ssr
 *.local
+dist.pem
+dist.crx
+dist.zip
 
 # editor directories and files
 .vscode/*
