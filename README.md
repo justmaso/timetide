@@ -1,54 +1,36 @@
-# React + TypeScript + Vite
+<div align="center">
+    <a href="" target="_blank">
+        <picture>
+            <source media="(prefers-color-scheme: light)" srcset="assets/global/timetide-light.svg">
+            <source media="(prefers-color-scheme: dark)" srcset="assets/global/timetide-dark.svg">
+            <img src="assets/global/timetide-light.svg" alt="timetide logo with text" width="300" height="75" style="max-width: 100%;">
+        </picture>
+    </a>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+    A customizable interval-based productivity timer
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+    <img src="https://img.shields.io/github/languages/top/justmaso/timetide?color=20B2AA" alt="top language in the repository">
+    <img src="https://img.shields.io/github/languages/code-size/justmaso/timetide?color=20B2AA" alt="code size">
+    <!-- <a href="https://github.com/justmaso/timetide/blob/main/LICENSE"><img src="https://img.shields.io/github/license/justmaso/timetide?color=20B2AA" alt="license"></a> -->
+    <img src="https://img.shields.io/github/last-commit/justmaso/timetide?color=20B2AA" alt="last commit">
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
+Boost your productivity with Timetide—the ultimate time management extension inspired by the proven Pomodoro® Technique to help you focus better and manage your time effortlessly.
 
-## Expanding the ESLint configuration
+## Features
+- ⏱️ **Fully Customizable Timers**—set work and rest durations to fit your unique workflow.
+- 🔁 **Skip Timers**—easily skip any timer for flexible focus and rest intervals.
+- 🔔 **Smart Alerts**—choose to receive sound alerts, pop-up notifications, or both when timers end.
+- 🔁 **Session Looping**—choose to automatically repeat sessions for uninterrupted focus.
+- 🌓 **Dark Theme**—easily switch between light and dark themes to reduce eye strain.
+- 💬 **Toolbar Indicator**—visual badge text shows the current timer running at a glance when pinned.
+- 👩‍💻 **Side Panel**—persistent user interface without disrupting your browsing experience.
+- 🌍**Internationalized**—available in 50+ locales across 44+ languages for a seamless global experience.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Legal Note
+Pomodoro® and The Pomodoro® Technique are trademarks of Francesco Cirillo. Timetide is not affiliated with or associated with, or endorsed by Pomodoro®, The Pomodoro® Technique or Francesco Cirillo.
